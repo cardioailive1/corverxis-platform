@@ -1,0 +1,48 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "functions": {
+    "api/chat.js":      { "runtime": "edge" },
+    "api/waitlist.js":  { "runtime": "edge" },
+    "api/documents.js": { "runtime": "edge" },
+    "api/export-pdf.js":{ "runtime": "edge" }
+  },
+  "env": {
+    "ANTHROPIC_API_KEY": "@anthropic_api_key",
+    "KV_REST_API_URL":   "@kv_rest_api_url",
+    "KV_REST_API_TOKEN": "@kv_rest_api_token",
+    "RESEND_API_KEY":    "@resend_api_key",
+    "PDFSHIFT_KEY":      "@pdfshift_key",
+    "STRIPE_SECRET_KEY": "@stripe_secret_key",
+    "STRIPE_WEBHOOK_SECRET": "@stripe_webhook_secret"
+  },
+  "rewrites": [
+    { "source": "/nexgenlife",       "destination": "/nexgenlife.html" },
+    { "source": "/nexagent",         "destination": "/nexagent.html" },
+    { "source": "/nexarion-ai",      "destination": "/nexarion-ai.html" },
+    { "source": "/nexcloud",         "destination": "/nexcloud.html" },
+    { "source": "/nexchat",          "destination": "/nexchat.html" },
+    { "source": "/nexgen-api",       "destination": "/nexgen-api.html" },
+    { "source": "/console",          "destination": "/nexgen-console.html" },
+    { "source": "/nexgen-api-keys",  "destination": "/nexgen-api-keys.html" },
+    { "source": "/api-keys",         "destination": "/nexgen-api-keys.html" }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin",  "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,DELETE,OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type,Authorization" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options",        "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy",        "value": "strict-origin-when-cross-origin" }
+      ]
+    }
+  ]
+}
